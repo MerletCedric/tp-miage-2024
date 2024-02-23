@@ -15,6 +15,5 @@ public interface TodoItemRepository extends CrudRepository<TodoItem,String> {
 	List<TodoItem> findAll(); 
 	
 	Optional<TodoItem> findById(String id);
-	
-	
+
 }
