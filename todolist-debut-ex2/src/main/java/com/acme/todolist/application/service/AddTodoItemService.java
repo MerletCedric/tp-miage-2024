@@ -2,6 +2,7 @@ package com.acme.todolist.application.service;
 
 import javax.inject.Inject;
 
+import com.acme.todolist.application.port.out.LoadTodoItem;
 import org.springframework.stereotype.Component;
 
 import com.acme.todolist.application.port.in.AddTodoItem;
@@ -13,10 +14,16 @@ public class AddTodoItemService implements AddTodoItem {
 
 	private UpdateTodoItem updateTodoItem;
 
-	//A compléter
-	public AddTodoItemService(UpdateTodoItem updateTodoItem) {
+	private LoadTodoItem loadTodoItem;
+
+	@Inject
+	public AddTodoItemService(UpdateTodoItem updateTodoItem, LoadTodoItem loadTodoItem) {
+		this.loadTodoItem=loadTodoItem;
+		this.updateTodoItem= updateTodoItem;
 	}
 
-	//A compléter	
-
+	@Override
+	public void addTodoItem(TodoItem item) {
+		updateTodoItem.storeNewTodoItem(item);
+	}
 }
