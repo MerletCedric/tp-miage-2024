@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
-
 import com.acme.todolist.application.port.out.LoadTodoItem;
 import com.acme.todolist.application.port.out.UpdateTodoItem;
 import com.acme.todolist.domain.TodoItem;
@@ -37,6 +35,8 @@ public class TodoItemPersistenceAdapter implements LoadTodoItem,UpdateTodoItem {
 				.map(todoItemJpaEntory -> mapper.mapToTodoItem(todoItemJpaEntory)).collect(Collectors.toList());
 	}
 
-	// A compléter
-
+	@Override
+	public void storeNewTodoItem (TodoItem item) {
+		todoItemRepository.save(mapper.mapToTodoItemJpaEntity(item));
+	}
 }
